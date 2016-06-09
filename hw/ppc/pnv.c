@@ -1053,12 +1053,9 @@ static void ppc_powernv_init(MachineState *machine)
 
     /* load initrd */
     if (initrd_filename) {
-            /* Try to locate the initrd in the gap between the kernel
-             * and the firmware. Add a bit of space just in case
-             */
             initrd_base = 0x40000000;
             initrd_size = load_image_targphys(initrd_filename, initrd_base,
-                                              0x10000000); // 128MB max
+                                              0x80000000); // 2GB max
             if (initrd_size < 0) {
                     fprintf(stderr, "qemu: could not load initial ram disk '%s'\n",
                             initrd_filename);
